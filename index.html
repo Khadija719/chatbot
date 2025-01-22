@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Recovery Clinic Chat</title>
+    <style>
+        body {
+            background-color: #663399;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: sans-serif;
+            color: white;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #441177;
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 50%;
+        }
+
+        h1 {
+            color: white;
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        #chatbox {
+            margin-top: 20px;
+            background-color: #331155;
+            padding: 10px;
+            border-radius: 5px;
+            height: 300px;
+            overflow-y: scroll;
+            color: white;
+            font-size: 1em;
+            display: flex;
+            flex-direction: column; /* Top to bottom conversation */
+        }
+
+        .message {
+            background-color: #4B2A8E;
+            border-radius: 10px;
+            margin: 10px 0;
+            padding: 10px 15px;
+            max-width: 70%;
+            align-self: flex-start;
+            color: white;
+        }
+
+        .bot-message {
+            background-color: #2E1F5D;
+            border-radius: 10px;
+            margin: 10px 0;
+            padding: 10px 15px;
+            max-width: 70%;
+            align-self: flex-end;
+            color: white;
+        }
+
+        .input-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        input[type="text"] {
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            flex-grow: 1;  /* Expand to take up available space */
+            margin-right: 10px; /* Space between input and button */
+        }
+
+        button {
+            background-color: #8844CC;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MENTAL HEALTH RECOVERY CLINIC</h1>
+        <div id="chatbox"></div>
+        <div class="input-container">
+            <input type="text" id="userInput" placeholder="Write a prompt">
+            <button id="sendButton">SEND</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sendButton = document.getElementById("sendButton");
+            const chatbox = document.getElementById("chatbox");
+            const userInput = document.getElementById("userInput");
+
+            sendButton.addEventListener("click", function() {
+                const userMessage = userInput.value.trim();
+
+                if (userMessage) {
+                    // POST the user's message to the Flask server
+                    fetch('/chat', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ message: userMessage })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Create messages and prepend them to the top
+                        const userDiv = document.createElement('div');
+                        userDiv.classList.add('message');
+                        userDiv.innerHTML = `<p><strong>You:</strong> ${userMessage}</p>`;
+                        chatbox.insertBefore(userDiv, chatbox.firstChild);
+
+                        const botDiv = document.createElement('div');
+                        botDiv.classList.add('bot-message');
+                        botDiv.innerHTML = `<p><strong>Bot:</strong> ${data.response}</p>`;
+                        chatbox.insertBefore(botDiv, chatbox.firstChild);
+
+                        // Scroll to top to view latest messages
+                        chatbox.scrollTop = 0;
+
+                        userInput.value = ''; // Clear input after sending
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
