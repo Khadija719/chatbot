@@ -1,0 +1,1322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+  <!-- Greeting Categories -->
+  <category>
+    <pattern>HELLO</pattern>
+    <template>Hi! How can I assist you today?</template>
+  </category>
+
+  <category>
+    <pattern>HI</pattern>
+    <template>Hello! How can I help you today?</template>
+  </category>
+
+  <!-- Patient Information Section with Set and Get -->
+  <category>
+    <pattern>WHAT IS YOUR REGISTRATION NUMBER</pattern>
+    <template>What is your Registration Number?</template>
+  </category>
+
+  <category>
+    <pattern>MY REGISTRATION NUMBER IS *</pattern>
+    <template>
+      <think><set name="registration_number"><star/></set></think>
+      Thank you. Your registration number is <get name="registration_number"/>.
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS YOUR NAME</pattern>
+    <template>What is your full name?</template>
+  </category>
+
+  <category>
+    <pattern>MY NAME IS *</pattern>
+    <template>
+      <think><set name="patient_name"><star/></set></think>
+      Thank you, <get name="patient_name"/>. How can I further assist you?
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS YOUR AGE</pattern>
+    <template>How old are you?</template>
+  </category>
+
+  <category>
+    <pattern>MY AGE IS *</pattern>
+    <template>
+      <think><set name="patient_age"><star/></set></think>
+      Great! You are <get name="patient_age"/> years old.
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS YOUR MARITAL STATUS</pattern>
+    <template>Can you tell me your marital status?</template>
+  </category>
+
+  <category>
+    <pattern>MY MARITAL STATUS IS *</pattern>
+    <template>
+      <think><set name="marital_status"><star/></set></think>
+      Got it! Your marital status is <get name="marital_status"/>.
+    </template>
+  </category>
+
+  <!-- Informant Information Section using Topic -->
+  <category>
+    <pattern>WHO IS YOUR INFORMANT</pattern>
+    <template>Can you tell me who your informant is?</template>
+  </category>
+
+  <category>
+    <pattern>MY INFORMANT IS *</pattern>
+    <template>
+      <think><set name="informant_name"><star/></set></think>
+      Thank you. Your informant is <get name="informant_name"/>.
+    </template>
+  </category>
+
+  <!-- History of Present Illness Section -->
+  <category>
+    <pattern>WHAT IS YOUR HISTORY OF PRESENT ILLNESS</pattern>
+    <template>Could you describe your history of present illness?</template>
+  </category>
+
+  <category>
+    <pattern>MY HISTORY OF PRESENT ILLNESS IS *</pattern>
+    <template>
+      <think><set name="history_of_present_illness"><star/></set></think>
+      Got it. Your history of present illness is: <get name="history_of_present_illness"/>.
+    </template>
+  </category>
+
+  <!-- Using Think to Store Data and Redirecting with Srai -->
+  <category>
+    <pattern>WHAT IS YOUR PAST PSYCHIATRIC HISTORY</pattern>
+    <template>Do you have any past psychiatric illness to report?</template>
+  </category>
+
+  <category>
+    <pattern>MY PAST PSYCHIATRIC HISTORY IS *</pattern>
+    <template>
+      <think><set name="past_psychiatric_history"><star/></set></think>
+      Thank you for the information. Redirecting to another section.
+      <srai>WHAT IS YOUR FAMILY HISTORY</srai>
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS YOUR FAMILY HISTORY</pattern>
+    <template>Can you share details about your family history?</template>
+  </category>
+
+  <category>
+    <pattern>MY FAMILY HISTORY IS *</pattern>
+    <template>
+      <think><set name="family_history"><star/></set></think>
+      Got it! Your family history is: <get name="family_history"/>.
+    </template>
+  </category>
+
+  <!-- Tags for Specific Topics -->
+  <topic name="personal_history">
+     <category>
+      <pattern>WHAT IS YOUR PERSONAL HISTORY</pattern>
+      <template>
+
+        <srai>WHAT IS YOUR BIRTH HISTORY</srai>
+
+      </template>
+    </category>
+
+  </topic>
+
+  <category>
+    <pattern>WHAT IS YOUR BIRTH HISTORY</pattern>
+    <template>
+      <think><set name="birth_history">Normal</set></think>
+      Birth history: <get name="birth_history"/>.
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS YOUR OCCUPATIONAL HISTORY</pattern>
+    <template>Can you provide details about your occupation?</template>
+  </category>
+
+  <category>
+    <pattern>MY OCCUPATION IS *</pattern>
+    <template>
+      <think><set name="occupation"><star/></set></think>
+      Thanks for sharing! Your occupation is <get name="occupation"/>.
+    </template>
+  </category>
+
+  <!-- Managing Feedback using Think -->
+  <category>
+    <pattern>WHAT IS THE MANAGEMENT PLAN FOR YOU</pattern>
+    <template>
+      <think><set name="management_plan">Cognitive Behavioral Therapy</set></think>
+      Your management plan includes: <get name="management_plan"/>.
+    </template>
+  </category>
+  
+   <!-- Onset of Illness -->
+  
+  <category>
+    <pattern>YES</pattern>
+    <template>Which year did the illness begin (e.g., 1992)?</template>
+  </category>
+
+  <category>
+    <pattern>THE ILLNESS STARTED IN *</pattern>
+    <template>
+      <think><set name="onset_year"><star/></set></think>
+      Thank you! The illness began in <get name="onset_year"/>.
+    </template>
+  </category>
+
+  <!-- Stressors or Causes -->
+  <category>
+    <pattern>YES</pattern>
+    <template>Can you identify the stressors or causes that contributed to the development of the illness?</template>
+  </category>
+
+  <category>
+    <pattern>THE STRESSORS WERE *</pattern>
+    <template>
+      <think><set name="stressors"><star/></set></think>
+      Thank you! The stressors that contributed to the illness are <get name="stressors"/>.
+    </template>
+  </category>
+
+  <!-- Factors (Biological, Psychological, Psychosocial) -->
+  <category>
+    <pattern>EXACTLY</pattern>
+    <template>Could you specify the contributing factors in these areas: Biological, Psychological, and Psychosocial?</template>
+  </category>
+
+  <category>
+    <pattern>BIOLOGICAL FACTORS ARE *</pattern>
+    <template>
+      <think><set name="biological_factors"><star/></set></think>
+      Thank you! The biological factors are <get name="biological_factors"/>.
+    </template>
+  </category>
+
+  <category>
+    <pattern>PSYCHOLOGICAL FACTORS ARE *</pattern>
+    <template>
+      <think><set name="psychological_factors"><star/></set></think>
+      Thank you! The psychological factors are <get name="psychological_factors"/>.
+    </template>
+  </category>
+
+  <category>
+    <pattern>PSYCHOSOCIAL FACTORS ARE *</pattern>
+    <template>
+      <think><set name="psychosocial_factors"><star/></set></think>
+      Thank you! The psychosocial factors are <get name="psychosocial_factors"/>.
+    </template>
+  </category>
+
+  <!-- Cognitive Errors and Negative Thoughts Identification -->
+  <category>
+    <pattern>WHAT ARE COGNITIVE ERRORS OR NEGATIVE THOUGHTS</pattern>
+    <template>Here are common cognitive errors: Overgeneralization, Catastrophizing, All-or-nothing thinking. Can you identify any cognitive errors?</template>
+  </category>
+
+  <category>
+    <pattern>Cognitive Error IS *</pattern>
+    <template>
+      <think><set name="cognitive_error"><star/></set></think>
+      The cognitive error you mentioned is <get name="cognitive_error"/>.
+    </template>
+  </category>
+
+  <!-- Challenging an Automatic Negative Thought -->
+  <category>
+    <pattern>HOW CAN I CHALLENGE MY AUTOMATIC NEGATIVE THOUGHTS</pattern>
+    <template>
+      Let’s work on challenging your negative thoughts. Please provide an example of one of your negative thoughts.
+    </template>
+  </category>
+
+  <category>
+    <pattern>MY NEGATIVE THOUGHT IS *</pattern>
+    <template>
+      <think><set name="negative_thought"><star/></set></think>
+      Let's explore the evidence for and against this thought.
+    </template>
+  </category>
+
+  <category>
+    <pattern>EVIDENCE FOR THE THOUGHT *</pattern>
+    <template>
+      <think><set name="evidence_for"><star/></set></think>
+      The evidence supporting your thought is: <get name="evidence_for"/>.
+    </template>
+  </category>
+
+  <category>
+    <pattern>EVIDENCE AGAINST THE THOUGHT *</pattern>
+    <template>
+      <think><set name="evidence_against"><star/></set></think>
+      The evidence against your thought is: <get name="evidence_against"/>.
+    </template>
+  </category>
+
+  <category>
+    <pattern>ALTERNATIVE THOUGHT *</pattern>
+    <template>
+      Great! The alternative thought is: <star/>. This will help you shift your thinking.
+    </template>
+  </category>
+
+  <!-- Socratic Dialogue (CBT Technique) -->
+  <category>
+    <pattern>HOW CAN I CHANGE MY THINKING</pattern>
+    <template>
+      Let’s use Socratic questioning to help you explore your thoughts. First, can you describe what triggered this thought?
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT TRIGGERED THIS THOUGHT *</pattern>
+    <template>
+      Great! Now, what evidence do you have that supports this thought?
+    </template>
+  </category>
+
+  <category>
+    <pattern>EVIDENCE THAT SUPPORTS THE THOUGHT *</pattern>
+    <template>
+      What evidence do you have that contradicts this thought?
+    </template>
+  </category>
+
+  <category>
+    <pattern>EVIDENCE THAT CONTRADICTS THE THOUGHT *</pattern>
+    <template>
+      Based on this, how would you reinterpret the thought? Can you think of an alternative way to look at it?
+    </template>
+  </category>
+
+  <!-- Psychoeducation on Relaxation Exercises -->
+  <category>
+    <pattern>WHAT ARE SOME RELAXATION EXERCISES</pattern>
+    <template>Some relaxation exercises include deep breathing, progressive muscle relaxation, and mindfulness meditation. Would you like to learn more about any of these?</template>
+  </category>
+
+  <category>
+    <pattern>TEACH ME DEEP BREATHING EXERCISE</pattern>
+    <template>Here’s how to practice deep breathing: Inhale deeply for 4 counts, hold for 4 counts, and exhale slowly for 4 counts. Try it out!</template>
+  </category>
+
+  <category>
+    <pattern>TEACH ME PROGRESSIVE MUSCLE RELAXATION</pattern>
+    <template>Start by tensing each muscle group for 5 seconds, then release. Begin with your feet and work your way up to your face. Let me know when you’re ready to try it!</template>
+  </category>
+
+  <!-- Review and Reflection -->
+  <category>
+    <pattern>HOW AM I DOING IN MY THERAPY</pattern>
+    <template>
+      Based on our discussions, you’ve made progress in identifying cognitive errors and challenging negative thoughts. Would you like a progress summary?
+    </template>
+  </category>
+
+  <category>
+    <pattern>YES, GIVE ME A PROGRESS SUMMARY</pattern>
+    <template>
+      Here’s a summary of what we’ve worked on:
+      1. Identifying cognitive errors and challenging negative thoughts.
+      2. Using Socratic questioning to reframe perspectives.
+      3. Practicing relaxation exercises like deep breathing.
+      Keep up the great work!
+    </template>
+  </category>
+  
+  
+
+  <!-- Greeting and Basic Interaction -->
+  <category>
+    <pattern>HELLO</pattern>
+    <template>Hi! How can I assist you today?</template>
+  </category>
+
+  <category>
+    <pattern>HI</pattern>
+    <template>Hello! How can I help you today?</template>
+  </category>
+
+  <category>
+    <pattern>HOW ARE YOU</pattern>
+    <template>I’m just a program, but I’m here to help you! How are you feeling today?</template>
+  </category>
+
+  <!-- Handling Emotions -->
+  <category>
+    <pattern>I FEEL SAD</pattern>
+    <template>
+      I’m sorry to hear that. Would you like to talk about what’s making you feel this way? 
+      Remember, expressing your feelings can be a step towards understanding them better.
+    </template>
+  </category>
+
+  <category>
+    <pattern>I FEEL ANXIOUS</pattern>
+    <template>
+      Anxiety can be overwhelming. Let’s try some relaxation exercises together. Would you like to practice deep breathing or mindfulness?
+    </template>
+  </category>
+
+  <category>
+    <pattern>I FEEL HAPPY</pattern>
+    <template>
+      That’s wonderful! It’s important to celebrate the moments that bring you joy. What’s making you happy today?
+    </template>
+  </category>
+
+  <!-- Journaling and Reflection -->
+  <category>
+    <pattern>WHAT IS JOURNALING</pattern>
+    <template>
+      Journaling is the act of writing down your thoughts, feelings, and experiences. It can help you process emotions and identify patterns in your thoughts. Would you like to start with a simple prompt?
+    </template>
+  </category>
+
+  <category>
+    <pattern>GIVE ME A JOURNAL PROMPT</pattern>
+    <template>
+      Here’s a journal prompt: "What are three things you are grateful for today, and why?" Take your time to reflect and write about it.
+    </template>
+  </category>
+
+  <!-- Therapy Techniques -->
+  <category>
+    <pattern>WHAT IS BEHAVIORAL ACTIVATION</pattern>
+    <template>
+      Behavioral activation is a way to increase positive activities in your life to improve your mood. For example, taking a walk, calling a friend, or engaging in a hobby. What’s one activity you enjoy doing?
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS GRATITUDE PRACTICE</pattern>
+    <template>
+      Gratitude practice involves focusing on what you’re thankful for. This can shift your mindset to a more positive one. Would you like to start a gratitude list?
+    </template>
+  </category>
+
+  <category>
+    <pattern>YES</pattern>
+    <template>
+      Great! Write down three things you’re thankful for today. Even small things like a good meal or a kind word can make a difference.
+    </template>
+  </category>
+
+  <!-- Goal Setting -->
+  <category>
+    <pattern>HOW CAN I SET GOALS</pattern>
+    <template>
+      Setting goals can help you stay focused and motivated. A good approach is the SMART method: Specific, Measurable, Achievable, Relevant, and Time-bound. What’s one goal you’d like to achieve?
+    </template>
+  </category>
+
+  <category>
+    <pattern>MY GOAL IS *</pattern>
+    <template>
+      That’s a great goal! Let’s break it down into smaller steps. What’s the first thing you can do to get started?
+    </template>
+  </category>
+
+  <category>
+    <pattern>I ACHIEVED MY GOAL</pattern>
+    <template>
+      Congratulations! Achieving your goal is a big step forward. How do you feel about your accomplishment?
+    </template>
+  </category>
+
+  <!-- Resources and Support -->
+  <category>
+    <pattern>CAN YOU SUGGEST RESOURCES</pattern>
+    <template>
+      Sure! Here are a few suggestions:
+      1. Mindfulness apps like Headspace or Calm.
+      2. Online therapy platforms like BetterHelp.
+      3. Books such as "Feeling Good" by David Burns. 
+      Let me know if you need help with any specific topics.
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHERE CAN I GET HELP</pattern>
+    <template>
+      If you’re looking for professional help, consider reaching out to a therapist or counselor. If you’re in crisis, please contact a local emergency service or helpline immediately.
+    </template>
+  </category>
+
+  <!-- Daily Check-ins -->
+  <category>
+    <pattern>HOW WAS YOUR DAY</pattern>
+    <template>
+      I’m here to help, as always! How was your day? Tell me something good or challenging about it.
+    </template>
+  </category>
+
+  <category>
+    <pattern>DAILY CHECK-IN</pattern>
+    <template>
+      Let’s do a quick check-in:
+      1. How are you feeling on a scale of 1 to 10?
+      2. What’s one thing you’re proud of today?
+      3. What’s one thing you’d like to improve tomorrow?
+    </template>
+  </category>
+
+  <!-- Interactive Activities -->
+  <category>
+    <pattern>GUIDED IMAGERY</pattern>
+    <template>
+      Let’s try guided imagery. Close your eyes and imagine a peaceful place like a beach or forest. What do you see, hear, and feel? Describe it to me.
+    </template>
+  </category>
+
+  <category>
+    <pattern>THOUGHT RECORD</pattern>
+    <template>
+      Let’s fill out a thought record together:
+      1. What was the situation?
+      2. What were your thoughts and feelings?
+      3. What’s an alternative perspective or response?
+      Take your time to reflect and write.
+    </template>
+  </category>
+  
+   <!-- Emotion-Specific Responses -->
+  <category>
+    <pattern>I FEEL ANGRY</pattern>
+    <template>
+      Anger can be tough to handle. Would you like to explore what's causing your anger or try a relaxation exercise to calm down?
+    </template>
+  </category>
+
+  <category>
+    <pattern>I FEEL CONFUSED</pattern>
+    <template>
+      It's okay to feel confused. Can you share what’s on your mind? Maybe we can work through it together.
+    </template>
+  </category>
+
+  <!-- CBT Techniques -->
+  <category>
+    <pattern>WHAT ARE CORE BELIEFS</pattern>
+    <template>
+      Core beliefs are deeply held assumptions about ourselves, others, and the world. Common ones include "I’m unlovable" or "I must succeed." Would you like help identifying yours?
+    </template>
+  </category>
+
+  <category>
+    <pattern>MY CORE BELIEF IS *</pattern>
+    <template>
+      Thank you for sharing. Your core belief is "<star/>." Let's explore how this belief impacts your thoughts and feelings.
+    </template>
+  </category>
+
+  <!-- Behavioral Activation -->
+  <category>
+    <pattern>SUGGEST AN ACTIVITY</pattern>
+    <template>
+      How about trying something new today? Here are a few ideas:
+      1. Take a 10-minute walk outdoors.
+      2. Call a friend or loved one.
+      3. Start a creative project like painting or writing.
+      Let me know which one you’d like to try!
+    </template>
+  </category>
+
+  <!-- Stress Management -->
+  <category>
+    <pattern>HOW CAN I MANAGE STRESS</pattern>
+    <template>
+      Managing stress involves both physical and mental strategies. You can:
+      1. Practice mindfulness or meditation.
+      2. Break tasks into smaller steps.
+      3. Engage in physical exercise.
+      Which of these would you like to explore first?
+    </template>
+  </category>
+
+  <!-- Support and Resources -->
+  <category>
+    <pattern>WHERE CAN I FIND HELP</pattern>
+    <template>
+      If you're in need of professional support, here are some options:
+      1. Reach out to a licensed therapist.
+      2. Explore online therapy platforms like BetterHelp or Talkspace.
+      3. In case of a crisis, contact a local helpline immediately.
+      Remember, you’re not alone, and help is available.
+    </template>
+  </category>
+
+  <!-- User-Specific Data Storage -->
+  <category>
+    <pattern>MY FAVORITE RELAXATION TECHNIQUE IS *</pattern>
+    <template>
+      <think><set name="favorite_relaxation"><star/></set></think>
+      Thank you! I’ll remember that your favorite relaxation technique is <get name="favorite_relaxation"/>.
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS MY FAVORITE RELAXATION TECHNIQUE</pattern>
+    <template>
+      Your favorite relaxation technique is <get name="favorite_relaxation"/>. Would you like to try it now?
+    </template>
+  </category>
+
+  <!-- Gratitude Practice -->
+  <category>
+    <pattern>WHAT IS GRATITUDE</pattern>
+    <template>
+      Gratitude is the practice of focusing on the positive aspects of life. It can improve your mood and overall outlook. Would you like to share something you’re grateful for?
+    </template>
+  </category>
+
+  <category>
+    <pattern>I AM GRATEFUL FOR *</pattern>
+    <template>
+      That’s wonderful! Being grateful for "<star/>" is a great way to stay positive. Keep it up!
+    </template>
+  </category>
+
+  <!-- Sleep Hygiene -->
+  <category>
+    <pattern>HOW CAN I SLEEP BETTER</pattern>
+    <template>
+      Here are some tips for better sleep:
+      1. Maintain a consistent sleep schedule.
+      2. Avoid screens at least an hour before bed.
+      3. Create a relaxing bedtime routine.
+      4. Limit caffeine and heavy meals in the evening.
+      Which of these would you like to try?
+    </template>
+  </category>
+
+  <!-- Coping Skills -->
+  <category>
+    <pattern>WHAT ARE COPING SKILLS</pattern>
+    <template>
+      Coping skills are techniques to handle stress and emotions effectively. Examples include journaling, deep breathing, and seeking support. What coping skills work best for you?
+    </template>
+  </category>
+
+  <category>
+    <pattern>MY COPING SKILL IS *</pattern>
+    <template>
+      That’s great! Your coping skill is "<star/>." Keep using it whenever you feel overwhelmed.
+    </template>
+  </category>
+
+  <!-- Default Response -->
+  <category>
+    <pattern>*</pattern>
+    <template>
+      I’m here to help with mental health tips and CBT techniques. Could you elaborate on what you’re experiencing or ask a specific question?
+    </template>
+  </category>
+  
+  <category>
+  <pattern>WHAT IS MENTAL HEALTH</pattern>
+  <template>
+    Mental health refers to your emotional, psychological, and social well-being. It impacts how you think, feel, and behave in daily life. Maintaining good mental health is essential for handling stress, building relationships, and making decisions. How can I help you today?
+  </template>
+</category>
+
+<category>
+  <pattern>WHAT IS CBT</pattern>
+  <template>
+    Cognitive Behavioral Therapy (CBT) is a type of talk therapy that helps you recognize and change negative thought patterns. It’s effective for managing anxiety, depression, and other mental health issues. Would you like to try a CBT exercise?
+  </template>
+</category>
+
+<category>
+  <pattern>WHAT IS MINDFULNESS</pattern>
+  <template>
+    Mindfulness is the practice of staying present in the moment and observing your thoughts and feelings without judgment. It’s a powerful tool for reducing stress and improving focus. Would you like to learn a mindfulness exercise?
+  </template>
+</category>
+
+<category>
+  <pattern>HOW CAN I IMPROVE MY MENTAL HEALTH</pattern>
+  <template>
+    Improving mental health can involve:
+    1. Practicing self-care daily.
+    2. Engaging in physical activities.
+    3. Connecting with supportive people.
+    4. Seeking professional help if needed.
+    Which of these would you like to start with?
+  </template>
+</category>
+
+<category>
+  <pattern>WHAT IS ANXIETY</pattern>
+  <template>
+    Anxiety is a feeling of worry or fear that can range from mild to severe. It’s a natural response to stress but can become problematic when it interferes with daily life. Are you experiencing anxiety? Let me know how I can support you.
+  </template>
+</category>
+
+<category>
+  <pattern>WHAT IS DEPRESSION</pattern>
+  <template>
+    Depression is a mood disorder that causes persistent feelings of sadness and loss of interest. It can affect your thoughts, behavior, and overall health. If you're struggling, reaching out to a professional is an important step. Would you like resources for support?
+  </template>
+</category>
+
+<category>
+  <pattern>WHAT IS TRAUMA</pattern>
+  <template>
+    Trauma is a response to deeply distressing events that overwhelm your ability to cope. It can affect mental and physical health. Healing from trauma often involves therapy and support. Would you like tips on managing its effects?
+  </template>
+</category>
+
+<category>
+  <pattern>HOW CAN I HANDLE NEGATIVE THOUGHTS</pattern>
+  <template>
+    Managing negative thoughts involves techniques like:
+    1. Identifying and challenging the thought.
+    2. Replacing it with a positive or neutral perspective.
+    3. Practicing mindfulness to stay in the present.
+    Would you like help practicing one of these?
+  </template>
+</category>
+
+<category>
+  <pattern>WHAT ARE TRIGGERS</pattern>
+  <template>
+    Triggers are specific events, situations, or memories that can cause emotional reactions, like stress or anxiety. Identifying your triggers can help you manage them effectively. Would you like help identifying yours?
+  </template>
+</category>
+
+<category>
+  <pattern>WHAT IS A SUPPORT GROUP</pattern>
+  <template>
+    A support group is a gathering of people facing similar challenges, like mental health conditions or addiction. Sharing experiences and learning from others can be empowering. Are you considering joining a support group?
+  </template>
+</category>
+
+<category>
+  <pattern>WHAT IS SELF-CARE</pattern>
+  <template>
+    Self-care is about taking actions to maintain or improve your well-being. It includes physical, emotional, and mental practices, like exercising, journaling, or meditating. Would you like self-care tips?
+  </template>
+</category>
+
+<category>
+  <pattern>HOW CAN I STOP OVERTHINKING</pattern>
+  <template>
+    Overthinking can be managed by:
+    1. Redirecting your focus to the present moment.
+    2. Writing down your thoughts to gain clarity.
+    3. Setting a time limit for worrying.
+    Would you like to try one of these strategies?
+  </template>
+</category>
+
+<category>
+  <pattern>WHAT IS THE ROLE OF FAMILY IN RECOVERY</pattern>
+  <template>
+    Family plays a vital role in recovery by providing emotional support, understanding, and encouragement. Open communication and patience are key. Would you like tips on involving your family in your recovery process?
+  </template>
+</category>
+
+
+<category>
+  <pattern>HOW CAN I DEAL WITH SOCIAL ANXIETY</pattern>
+  <template>
+    Dealing with social anxiety involves:
+    1. Practicing deep breathing to calm yourself.
+    2. Gradually exposing yourself to social situations.
+    3. Challenging negative thoughts about social interactions.
+    Would you like to try a specific strategy?
+  </template>
+</category>
+
+<category>
+  <pattern>WHAT IS PTSD</pattern>
+  <template>
+    PTSD (Post-Traumatic Stress Disorder) is a condition triggered by a traumatic event. Symptoms include flashbacks, nightmares, and severe anxiety. Therapy, like CBT or EMDR, is often helpful. Would you like resources for PTSD?
+  </template>
+</category>
+
+<category>
+  <pattern>WHAT IS EMDR</pattern>
+  <template>
+    EMDR (Eye Movement Desensitization and Reprocessing) is a therapy that helps people heal from trauma by processing distressing memories. It’s particularly effective for PTSD. Would you like to learn more about it?
+  </template>
+</category>
+
+<category>
+  <pattern>WHAT IS BURNOUT</pattern>
+  <template>
+    Burnout is a state of emotional, physical, and mental exhaustion caused by prolonged stress, often related to work or caregiving. Taking breaks, setting boundaries, and seeking support can help. Would you like tips for recovery?
+  </template>
+</category>
+
+<category>
+  <pattern>HOW CAN I BUILD SELF-ESTEEM</pattern>
+  <template>
+    Building self-esteem takes time and practice. You can:
+    1. Focus on your strengths and achievements.
+    2. Set realistic goals and celebrate progress.
+    3. Challenge self-critical thoughts.
+    Would you like to explore one of these steps?
+  </template>
+</category>
+
+<category>
+  <pattern>HOW CAN I MANAGE ANGER</pattern>
+  <template>
+    Managing anger involves:
+    1. Practicing relaxation techniques like deep breathing.
+    2. Identifying triggers and planning how to respond calmly.
+    3. Expressing feelings assertively but respectfully.
+    Would you like to try an anger management strategy?
+  </template>
+</category>
+
+<category>
+  <pattern>HOW DO I SUPPORT A LOVED ONE WITH DEPRESSION</pattern>
+  <template>
+    Supporting someone with depression involves:
+    1. Listening without judgment.
+    2. Encouraging them to seek professional help.
+    3. Offering practical assistance and patience.
+    Would you like more tips on being supportive?
+  </template>
+</category>
+
+<category>
+  <pattern>HOW DO I COPE WITH GRIEF</pattern>
+  <template>
+    Coping with grief involves:
+    1. Allowing yourself to feel and process emotions.
+    2. Seeking support from friends, family, or a therapist.
+    3. Engaging in activities that bring comfort and peace.
+    Would you like resources or exercises to help with grief?
+  </template>
+</category>
+
+
+<!-- Anxiety Management -->
+<category>
+  <pattern>HOW DO I STOP OVERTHINKING</pattern>
+  <template>
+    Overthinking can be challenging, but you can try:
+    1. Writing down your thoughts to release them from your mind.
+    2. Setting a "worry time" to address concerns for a limited period.
+    3. Practicing mindfulness to focus on the present.
+    Would you like to explore one of these strategies?
+  </template>
+</category>
+
+<!-- Dealing with Loneliness -->
+<category>
+  <pattern>HOW CAN I DEAL WITH LONELINESS</pattern>
+  <template>
+    Dealing with loneliness involves:
+    1. Reaching out to friends or joining community groups.
+    2. Starting a new hobby or activity to meet people.
+    3. Practicing self-compassion and self-care.
+    Would you like tips for connecting with others?
+  </template>
+</category>
+
+<!-- Understanding OCD -->
+<category>
+  <pattern>WHAT IS OCD</pattern>
+  <template>
+    OCD (Obsessive-Compulsive Disorder) is a condition involving unwanted thoughts (obsessions) and repetitive behaviors (compulsions). Therapy, especially CBT, can be effective. Would you like resources about OCD?
+  </template>
+</category>
+
+<!-- Managing Fear -->
+<category>
+  <pattern>HOW DO I MANAGE FEAR</pattern>
+  <template>
+    Managing fear involves:
+    1. Identifying and challenging irrational fears.
+    2. Practicing grounding techniques to stay present.
+    3. Taking small steps to face your fears gradually.
+    Would you like help with a specific fear?
+  </template>
+</category>
+
+<!-- Self-Improvement -->
+<category>
+  <pattern>HOW CAN I FORM GOOD HABITS</pattern>
+  <template>
+    Forming good habits involves:
+    1. Starting small and being consistent.
+    2. Using reminders and tracking progress.
+    3. Rewarding yourself for staying on track.
+    Would you like tips on a specific habit?
+  </template>
+</category>
+
+<!-- Coping with Rejection -->
+<category>
+  <pattern>HOW DO I HANDLE REJECTION</pattern>
+  <template>
+    Handling rejection involves:
+    1. Recognizing it as a natural part of life.
+    2. Avoiding self-blame and focusing on growth.
+    3. Seeking support from loved ones.
+    Would you like strategies to build resilience?
+  </template>
+</category>
+
+<!-- Time Management -->
+<category>
+  <pattern>HOW CAN I MANAGE MY TIME BETTER</pattern>
+  <template>
+    Better time management involves:
+    1. Prioritizing tasks and setting realistic goals.
+    2. Using tools like calendars or to-do lists.
+    3. Avoiding multitasking and focusing on one thing at a time.
+    Would you like more tips on productivity?
+  </template>
+</category>
+
+<!-- Addiction Support -->
+<category>
+  <pattern>HOW DO I OVERCOME ADDICTION</pattern>
+  <template>
+    Overcoming addiction often requires:
+    1. Seeking professional help from therapists or support groups.
+    2. Building a strong support network.
+    3. Developing healthy coping mechanisms.
+    Would you like resources or further guidance on this?
+  </template>
+</category>
+
+<!-- Handling Perfectionism -->
+<category>
+  <pattern>HOW DO I DEAL WITH PERFECTIONISM</pattern>
+  <template>
+    Dealing with perfectionism involves:
+    1. Setting realistic and flexible goals.
+    2. Accepting mistakes as part of growth.
+    3. Practicing self-compassion and acknowledging progress.
+    Would you like tips to start letting go of perfectionism?
+  </template>
+</category>
+
+<!-- Parenting Challenges -->
+<category>
+  <pattern>HOW CAN I BE A BETTER PARENT</pattern>
+  <template>
+    Being a better parent involves:
+    1. Listening to your child’s needs and emotions.
+    2. Setting consistent and clear boundaries.
+    3. Practicing self-care to maintain your own well-being.
+    Would you like resources for parenting challenges?
+  </template>
+</category>
+
+<!-- Mindfulness Practice -->
+<category>
+  <pattern>HOW DO I PRACTICE MINDFULNESS</pattern>
+  <template>
+    Practicing mindfulness involves:
+    1. Focusing on your breath to stay in the present.
+    2. Observing your thoughts without judgment.
+    3. Engaging fully in daily activities, like eating or walking.
+    Would you like a guided mindfulness exercise?
+  </template>
+</category>
+
+<!-- Relationship Issues -->
+<category>
+  <pattern>HOW DO I IMPROVE MY RELATIONSHIP</pattern>
+  <template>
+    Improving relationships involves:
+    1. Communicating openly and honestly.
+    2. Spending quality time together.
+    3. Addressing conflicts with patience and empathy.
+    Would you like help with a specific relationship challenge?
+  </template>
+</category>
+
+<!-- Depression and Hopelessness -->
+<category>
+  <pattern>HOW CAN I DEAL WITH FEELINGS OF HOPELESSNESS</pattern>
+  <template>
+    Dealing with hopelessness involves:
+    1. Talking to someone you trust or a professional.
+    2. Identifying small, positive steps forward.
+    3. Reflecting on past challenges you've overcome.
+    Would you like guidance on starting this process?
+  </template>
+</category>
+
+<!-- General Topics Redirection -->
+<category>
+  <pattern>HELP ME WITH ANXIETY</pattern>
+  <template>
+    <srai>WHAT IS ANXIETY</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>HELP ME RELAX</pattern>
+  <template>
+    <srai>HOW CAN I RELAX</srai>
+  </template>
+</category>
+
+<!-- Anxiety -->
+<category>
+  <pattern>WHAT IS ANXIETY</pattern>
+  <template>
+    Anxiety is your body's natural response to stress or fear. It can stem from:
+    1. Work or academic pressures.
+    2. Major life changes.
+    3. Past traumatic experiences.
+    Would you like solutions or relaxation techniques?
+  </template>
+</category>
+
+<category>
+  <pattern>CAUSES OF ANXIETY</pattern>
+  <template>
+    Common causes of anxiety include:
+    1. Genetic predisposition.
+    2. Environmental stressors.
+    3. Imbalances in brain chemistry.
+    Would you like advice on managing anxiety or overcoming specific triggers?
+  </template>
+</category>
+
+<!-- Relaxation Techniques -->
+<category>
+  <pattern>HOW CAN I RELAX</pattern>
+  <template>
+    Here are some relaxation tips:
+    1. Take deep breaths—inhale for 4 seconds, hold for 4, exhale for 6.
+    2. Listen to calming music or nature sounds.
+    3. Try progressive muscle relaxation.
+    Which one would you like to try?
+  </template>
+</category>
+
+<!-- Entertainment Suggestions -->
+<category>
+  <pattern>SUGGEST ENTERTAINMENT</pattern>
+  <template>
+    How about:
+    1. Watching a lighthearted movie or comedy show.
+    2. Listening to uplifting music or a podcast.
+    3. Playing a casual video game or solving puzzles.
+    Let me know your preferences, and I’ll suggest more!
+  </template>
+</category>
+
+<category>
+  <pattern>SUGGEST A MOVIE</pattern>
+  <template>
+    Here are some movie genres:
+    1. Comedy: "The Grand Budapest Hotel."
+    2. Inspirational: "The Pursuit of Happyness."
+    3. Relaxing: "My Neighbor Totoro."
+    Which genre would you like more suggestions for?
+  </template>
+</category>
+
+<!-- Causes and Solutions -->
+<category>
+  <pattern>WHAT CAUSES STRESS</pattern>
+  <template>
+    Stress can be caused by:
+    1. Work deadlines and financial issues.
+    2. Family or relationship conflicts.
+    3. Health concerns or uncertainty about the future.
+    Would you like strategies to manage stress?
+  </template>
+</category>
+
+<category>
+  <pattern>HOW TO OVERCOME FEAR</pattern>
+  <template>
+    Overcoming fear involves:
+    1. Understanding and naming your fears.
+    2. Facing them gradually in a safe environment.
+    3. Seeking support or therapy if needed.
+    Would you like a step-by-step guide or coping tips?
+  </template>
+</category>
+
+<!-- Coping with Life Changes -->
+<category>
+  <pattern>HOW TO DEAL WITH CHANGE</pattern>
+  <template>
+    Change can be hard, but you can:
+    1. Focus on aspects you can control.
+    2. Maintain routines that bring stability.
+    3. View change as an opportunity for growth.
+    Would you like tips for a specific situation?
+  </template>
+</category>
+
+<!-- Gratitude Practice -->
+<category>
+  <pattern>TEACH ME ABOUT GRATITUDE</pattern>
+  <template>
+    <srai>WHAT IS GRATITUDE</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>WHAT IS GRATITUDE</pattern>
+  <template>
+    Gratitude is about appreciating the good in your life. It reduces stress and boosts happiness. 
+    Would you like to practice it now by sharing one thing you're grateful for?
+  </template>
+</category>
+
+<!-- Encouragement and Positivity -->
+<category>
+  <pattern>I FEEL DEMOTIVATED</pattern>
+  <template>
+    Feeling demotivated happens to everyone. Here are ways to regain energy:
+    1. Break tasks into small, manageable steps.
+    2. Remember past successes for encouragement.
+    3. Take a short break to recharge.
+    Would you like tips on specific tasks?
+  </template>
+</category>
+
+<category>
+  <pattern>HELP ME STAY POSITIVE</pattern>
+  <template>
+    Staying positive involves:
+    1. Surrounding yourself with supportive people.
+    2. Practicing gratitude and mindfulness daily.
+    3. Limiting exposure to negative news or social media.
+    Would you like a daily affirmation or positive exercise?
+  </template>
+</category>
+
+<!-- Default Response -->
+<category>
+  <pattern>CASES</pattern>
+  <template>
+    Can you specify the issue? I can provide information on topics like anxiety, stress, fear, or relaxation.
+  </template>
+</category>
+
+<category>
+  <pattern>*</pattern>
+  <template>
+    I’m here to help! Could you rephrase or specify your request? I can assist with mental health tips, causes, solutions, and even entertainment ideas.
+  </template>
+</category>
+
+<!-- Physical Health -->
+<category>
+  <pattern>HOW CAN I IMPROVE MY HEALTH</pattern>
+  <template>
+    <srai>WHAT ARE HEALTHY HABITS</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>WHAT ARE HEALTHY HABITS</pattern>
+  <template>
+    Healthy habits include:
+    1. Eating a balanced diet with fruits, vegetables, and lean protein.
+    2. Exercising regularly, even simple activities like walking.
+    3. Staying hydrated and getting enough sleep.
+    Which of these would you like more advice on?
+  </template>
+</category>
+
+<!-- Mindfulness -->
+<category>
+  <pattern>WHAT IS MINDFULNESS</pattern>
+  <template>
+    Mindfulness is being present in the moment without judgment. It helps reduce stress and improve focus.
+    Would you like to try a mindfulness exercise now?
+  </template>
+</category>
+
+<category>
+  <pattern>MINDFULNESS EXERCISE</pattern>
+  <template>
+    Try this:
+    1. Sit comfortably and close your eyes.
+    2. Focus on your breath as you inhale and exhale slowly.
+    3. If your mind wanders, gently bring it back to your breath.
+    Practice this for 2-5 minutes. Let me know how you feel afterward!
+  </template>
+</category>
+
+<!-- Self-Esteem -->
+<category>
+  <pattern>HOW CAN I BUILD SELF-ESTEEM</pattern>
+  <template>
+    Building self-esteem involves:
+    1. Celebrating small accomplishments.
+    2. Challenging negative self-talk with positive affirmations.
+    3. Surrounding yourself with supportive people.
+    Would you like to explore these further?
+  </template>
+</category>
+
+<category>
+  <pattern>POSITIVE AFFIRMATIONS</pattern>
+  <template>
+    Here are some affirmations:
+    1. I am worthy of love and respect.
+    2. I am capable of achieving my goals.
+    3. I choose to focus on my strengths.
+    Repeat these daily to boost your self-esteem!
+  </template>
+</category>
+
+<!-- Productivity -->
+<category>
+  <pattern>HOW CAN I BE MORE PRODUCTIVE</pattern>
+  <template>
+    To increase productivity:
+    1. Prioritize your tasks using a to-do list.
+    2. Use time management techniques like the Pomodoro method.
+    3. Avoid multitasking—focus on one task at a time.
+    Would you like detailed steps on any of these?
+  </template>
+</category>
+
+<category>
+  <pattern>WHAT IS THE POMODORO METHOD</pattern>
+  <template>
+    The Pomodoro method involves:
+    1. Working for 25 minutes on a single task.
+    2. Taking a 5-minute break.
+    3. After 4 cycles, taking a longer 15-30 minute break.
+    This method helps maintain focus and prevent burnout. Would you like to try it?
+  </template>
+</category>
+
+<!-- Advanced Entertainment Suggestions -->
+<category>
+  <pattern>GIVE ME MORE ENTERTAINMENT IDEAS</pattern>
+  <template>
+    Here are some fun options:
+    1. Explore a new hobby like baking, painting, or gardening.
+    2. Watch an educational documentary or take an online course.
+    3. Play board games or solve brain-teasers with friends or family.
+    Let me know if you’d like more suggestions!
+  </template>
+</category>
+
+<category>
+  <pattern>SUGGEST MUSIC</pattern>
+  <template>
+    Music can lift your spirits! Here are some recommendations:
+    1. Relaxing Instrumental: Ludovico Einaudi’s "Nuvole Bianche."
+    2. Upbeat Pop: Dua Lipa’s "Levitating."
+    3. Classic Rock: Queen’s "Don’t Stop Me Now."
+    Which genre do you prefer?
+  </template>
+</category>
+
+<!-- Causes of Emotional Issues -->
+<category>
+  <pattern>WHY DO I FEEL SAD</pattern>
+  <template>
+    Sadness can have various causes, such as:
+    1. Loneliness or isolation.
+    2. Recent disappointments or losses.
+    3. Lack of sunlight or physical activity.
+    Would you like help identifying your specific triggers or coping strategies?
+  </template>
+</category>
+
+<category>
+  <pattern>WHAT CAUSES ANGER</pattern>
+  <template>
+    Anger often arises from:
+    1. Frustration or feeling powerless.
+    2. Being treated unfairly or disrespected.
+    3. Stress or physical discomfort.
+    Would you like tips on calming down or addressing the root causes?
+  </template>
+</category>
+
+<!-- Additional Coping Skills -->
+<category>
+  <pattern>WHAT ARE SOME COPING SKILLS</pattern>
+  <template>
+    Coping skills include:
+    1. Journaling to process your emotions.
+    2. Practicing grounding techniques like the 5-4-3-2-1 method.
+    3. Engaging in creative outlets like drawing or writing.
+    Would you like more details on any of these?
+  </template>
+</category>
+
+<category>
+  <pattern>WHAT IS THE 5-4-3-2-1 METHOD</pattern>
+  <template>
+    The 5-4-3-2-1 method is a grounding technique:
+    1. Name 5 things you can see.
+    2. Touch 4 things around you.
+    3. Listen for 3 sounds.
+    4. Identify 2 things you can smell.
+    5. Recognize 1 thing you can taste.
+    It’s great for managing anxiety or stress. Try it now!
+  </template>
+</category>
+
+<!-- Default Redirection -->
+<category>
+  <pattern>I NEED HELP</pattern>
+  <template>
+    <srai>WHAT DO YOU NEED HELP WITH</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>WHAT DO YOU NEED HELP WITH</pattern>
+  <template>
+    I can assist with:
+    1. Mental health tips (e.g., anxiety, stress, relaxation).
+    2. Lifestyle suggestions (e.g., productivity, entertainment).
+    3. Understanding causes of emotions.
+    Let me know where to start!
+  </template>
+</category>
+
+
+
+  <!-- Ending the Session -->
+  <category>
+    <pattern>THANK YOU</pattern>
+    <template>You’re welcome! If you need more help, feel free to ask.</template>
+  </category>
+
+  <category>
+    <pattern>GOODBYE</pattern>
+    <template>Goodbye! Take care, and don’t hesitate to reach out.</template>
+  </category>
+
+
+
+
+ 
+  
+
+</aiml>
